@@ -1,0 +1,8 @@
+services:
+  db:
+    image: mysql:latest
+    environment:
+        MYSQL_DATABASE: Cbank
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+    ports:
+        - "3306:3306"

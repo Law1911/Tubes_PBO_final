@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" th:href="@{/bootstrap-5.2.0-dist/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap-5.2.0-dist/css/all.min.css}">
+  <link rel="stylesheet" th:href="@{/bootstrap-5.2.0-dist/css/bootstrap-log.css}">
+
+
+  <style>
+    .row-head {
+      background-color: rgb(58, 116, 224);
+      color: white;
+      height: 100px;
+      padding: 20px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .row>div>a {
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+    }
+
+    .row-body {
+      margin-top: 20px;
+    }
+
+    .row-body>div>div {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .image {
+      width: 25px;
+      height: 25px;
+      margin: 5px;
+    }
+
+    .image2 {
+      width: 150px;
+      height: 150px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 50px;
+    }
+
+    .image3 {
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+    }
+
+    .bank-title {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .form-group.custom-width {
+      width: 200px;
+    }
+
+    .input-group-prepend .input-group-text {
+      padding: 0;
+      background: none;
+      border: none;
+    }
+
+    .input-group-prepend .input-group-text img {
+      height: 100%;
+    }
+
+    .input-group .form-control {
+      padding-left: 0;
+    }
+
+    .input-group .input-group-text {
+      margin-right: 10px;
+    }
+
+    .card-fat {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 500px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row row-head">
+      <div class="col-12">
+        <h2 class="bank-title">
+          <img class="image3" th:src="@{image/piggy-bank.png}" alt="">
+          CAMPUS BANK
+        </h2>
+      </div>
+      <div class="col-4 button-head">
+      </div>
+    </div>
+    <div class="my-login-page">
+      <section class="h-100">
+        <div class="container-sm h-100">
+          <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+              <div class="card-fat">
+                <img class="image2" th:src="@{/image/campus_bank.png}" alt="logo">
+                <div class="card-body">
+                  <form method="post" th:action="@{/login}" class="my-login-validation" novalidate="">
+                    <div class="input-group col-lg-6 mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text bg-white border-0 border-md">
+                          <img class="image" th:src="@{/image/user.png}" alt="">
+                        </span>
+                      </div>
+                      <input id="email" type="email" class="form-control" name="username"
+                        placeholder="Email Address or Username" value="" required autofocus>
+                      <div class="invalid-feedback">
+                        Email is invalid
+                      </div>
+                    </div>
+                    <div class="input-group col-lg-6 mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text bg-white border-0 border-md">
+                          <img class="image" th:src="@{image/lock.png}" alt="">
+                        </span>
+                      </div>
+                      <input id="password" type="password" class="form-control" name="password" placeholder="Password"
+                        value="" required data-eye>
+                      <div class="invalid-feedback">
+                        Password is required
+                      </div>
+                    </div>
+                    <a href="forgot.html" class="float-right p-2">
+                      Forgot Password?
+                    </a>
+                    <div class="form-group">
+                      <div class="custom-checkbox custom-control d-flex p-2">
+                        <input type="checkbox" name="remember" id="remember" class="custom-control-input">
+                        <label for="remember" class="custom-control-label p-2">Remember Me</label>
+                      </div>
+                    </div>
+
+                    <div
+                      class="form-group mx-auto mb-0 custom-width text-center d-flex align-items-center justify-content-center">
+                      <button type="submit" class="btn btn-primary btn-block py-2 mt-0">
+                        Login
+                      </button>
+                    </div>
+
+                    <div class="mt-0 text-center p-3">
+                      Don't have an account? <a href="register.html">Create One</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</body>
+
+</html>

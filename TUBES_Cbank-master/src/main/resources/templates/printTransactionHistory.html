@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="./bootstrap-5.2.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./bootstrap-5.2.0-dist/css/all.min.css">
+
+  <title>History</title>
+  <style>
+    .row {
+      height: 100px;
+      padding: 20px;
+    }
+
+    .row>div>h1 {
+      color: black;
+    }
+
+    .row>div>a {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .button-head,
+    .button-main {
+      text-align: end;
+    }
+
+    thead {
+      background-color: rgb(10, 141, 21);
+      text-align: center;
+      color: whitesmoke;
+    }
+
+    .button-main>button {
+      margin-left: 10px;
+    }
+
+    /* CSS untuk tampilan sidebar */
+    .sidebar {
+      width: 200px;
+      background-color: rgb(58, 116, 224);
+      padding: 0px;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 20px;
+      margin: 0px;
+    }
+
+    .sidebar li {
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: whitesmoke;
+    }
+
+    .sidebar a:hover {
+      color: #000;
+    }
+
+    /* CSS untuk konten halaman */
+    .content {
+      margin-left: 220px;
+      /* Lebar sidebar + jarak margin */
+      padding: 20px;
+    }
+
+    .image {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="sidebar">
+      <ul style="margin: 40px 10px 0px 40px;">
+        <img src="image/piggy-bank.png" alt="">
+        <li style="color: #f5f5f5; font-size: 130%;">C-Bank</li>
+      </ul>
+      <ul>
+        <li>
+          <img class="image" src="image/menu.png" alt="Icon Menu">
+          <a href="menu">Menu</a>
+        </li>
+        <li>
+          <img class="image" src="image/transfer.png" alt="Icon Transfer">
+          <a href="transfer">Transfer</a>
+        </li>
+        <li>
+          <img class="image" src="image/deposit.png" alt="Icon Deposit">
+          <a href="deposit">Deposit</a>
+        </li>
+        <li>
+          <img class="image" src="image/withdraw.png" alt="Icon Withdraw">
+          <a href="withdraw">Withdraw</a>
+        </li>
+        <li>
+          <img class="image" src="image/history.png" alt="Icon History">
+          <a href="printTransactionHistory">History</a>
+        </li>
+        <li>
+          <img class="image" src="image/userMenu.png" alt="Icon History">
+          <a href="updateAccountInfo">Account</a>
+        </li>
+        <li>
+          <img class="image" src="image/logout.png" alt="Icon History">
+          <a href="logout">Logout</a>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <h1>History Transfer</h1>
+        </div>
+        
+      </div>
+      <div class="main-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Type</th>
+              <th scope="col">Sender Name</th>
+              <th scope="col">Norek</th>
+              <th scope="col">Recipient Name</th>
+              <th scope="col">Transfer Amount</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="transaction, i : ${transactionHistory}">
+              <td class="text-center" th:text="${i.count}"></td>
+              <td class="text-center" th:text="${transaction.type}">35</td>
+              <td class="text-center" th:text="${transaction.senderName}">Tatiana Kim</td>
+              <td th:text="${transaction.norek}" class="text-center">5</td>
+              <td th:text="${transaction.recipientName}" class="text-center">Cody Avila</td>
+              <td th:text="${transaction.amount}" class="text-center num-comma pr-20">5000000</td>
+              <td th:text="${transaction.status}" class="text-center num-comma pr-20">500000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="./bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+  </script>
+</body>
+
+</html>

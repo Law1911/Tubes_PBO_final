@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./bootstrap-5.2.0-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./bootstrap-5.2.0-dist/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <title>Menu</title>
+
+  <style>
+    .row {
+      height: 100px;
+      padding: 20px;
+    }
+
+    .row>div>h1 {
+      color: black;
+    }
+
+    .row>div>a {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .button-head,
+    .button-main {
+      text-align: end;
+    }
+
+    thead {
+      background-color: transparent;
+      text-align: center;
+      color: black;
+    }
+
+    .button-main>button {
+      margin-left: 10px;
+    }
+
+    /* CSS untuk tampilan sidebar */
+    .sidebar {
+      width: 200px;
+      background-color: rgb(58, 116, 224);
+      padding: 0px;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 20px;
+      margin: 0px;
+    }
+
+    .sidebar li {
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: whitesmoke;
+    }
+
+    .sidebar a:hover {
+      color: #000;
+    }
+
+    /* CSS untuk konten halaman */
+    .content {
+      margin-left: 220px;
+      /* Lebar sidebar + jarak margin */
+      padding: 20px;
+    }
+
+    .text{
+      margin: 0px;
+    }
+
+    .column{
+      margin: 0px;
+    }
+
+    .image {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+
+    .imgcard {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 350px;
+    }
+
+    .credit-card {
+      width: 400px;
+      height: 250px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 0 auto;
+      margin-top: 50px;
+      position: relative;
+    }
+
+    .credit-card .card-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+    }
+
+    .credit-card .card-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333333;
+      margin-top: 80px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .credit-card .card-info {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #555555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="sidebar">
+      <ul style="margin: 40px 10px 0px 40px;">
+        <img th:src="@{image/piggy-bank.png}" alt="">
+        <li style="color: #f5f5f5; font-size: 130%;">C-Bank</li>
+      </ul>
+      <ul>
+        <li>
+          <img class="image" src="image/menu.png" alt="Icon Menu">
+          <a href="menu">Menu</a>
+        </li>
+        <li>
+          <img class="image" src="image/transfer.png" alt="Icon Transfer">
+          <a href="transfer">Transfer</a>
+        </li>
+        <li>
+          <img class="image" src="image/deposit.png" alt="Icon Deposit">
+          <a href="deposit">Deposit</a>
+        </li>
+        <li>
+          <img class="image" src="image/withdraw.png" alt="Icon Withdraw">
+          <a href="withdraw">Withdraw</a>
+        </li>
+        <li>
+          <img class="image" src="image/history.png" alt="Icon History">
+          <a href="printTransactionHistory">History</a>
+        </li>
+        <li>
+          <img class="image" src="image/userMenu.png" alt="Icon History">
+          <a href="updateAccountInfo">Account</a>
+        </li>
+        <li>
+          <img class="image" src="image/logout.png" alt="Icon History">
+          <a href="logout">Logout</a>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <h1>List Receipent</h1>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row align-items-start mt-4">
+          <div class="col">
+            <div class="main-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">FullName</th>
+                    <th scope="col">No Rek</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Iterasi dan tampilkan data dari list recipients -->
+                  <tr style="padding: 0px 20px 0px 20px;" th:each="recipient : ${listRecipients}">
+                    <td class="text-center" th:text="${recipient.firstName + ' ' + recipient.lastName}"></td>
+                    <td class="text-center" th:text="${recipient.norek}"></td>
+                    <td class="button-main">
+                      <!-- Tambahkan aksi sesuai kebutuhan -->
+                      <a th:href="@{/updateAccountInfo/{id}(id=${recipient.id})}" style="color:transparent">
+                        <button type="button" class="btn btn-outline-secondary" title="Edit" data-bs-toggle="popover"
+                          data-bs-trigger="hover" data-bs-placement="top" data-content="Content">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                      </a>
+                      <a href="transfer" style="color:transparent">
+                        <button type="button" class="btn btn-outline-primary" title="Transfer" data-bs-toggle="popover"
+                          data-bs-trigger="hover" data-bs-placement="top" data-content="Content">
+                          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        </button>
+                      </a>
+                      <form style="display: inline; color:transparent" th:action="@{/deleteRecipient/{id}(id=${recipient.id})}" method="post">
+                        <button type="submit" class="btn btn-outline-danger" title="Delete" data-bs-toggle="popover"
+                                data-bs-trigger="hover" data-bs-placement="top" data-content="Content">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <!-- <img th:src="@{/image/credit-card.png}" class="imgcard" alt="..."> -->
+              <div class="container">
+                <div class="credit-card">
+                  <i class="fab fa-cc-visa card-logo"></i>
+                  <div th:th:text="${user.getAccount().getNorek()}" class="card-number">
+                    1234 5678 9012 3456
+                  </div>
+                  <div class="card-info">
+                    <div th:text="${user.getAccount().getFirstName + ' ' + user.getAccount().getLastName}"></div>
+                    <div>Valid Thru: 12/24</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Balance</h5>
+                <div class="row">
+                  <div class="column">
+                    <p class="text">Balance</p>
+                  </div>
+                  <div class="column" style="text-align: right;">
+                    <h4 th:th:text="Rp + ${user.getAccount().getBalance()}">Rp 4.000.000</h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <p class="text">Credit Limit</p>
+                  </div>
+                  <div class="column" style="text-align: right;">
+                    <h4>Rp 1.000.000</h4>
+                  </div>
+                </div>
+                <h5 class="card-title" style="padding-top: 30px;">Information</h5>
+                <div class="row">
+                  <div class="column">
+                    <p class="text">Status</p>
+                  </div>
+                  <div class="column" style="text-align: right;">
+                    <a href="#" type="button" class="btn btn-success"
+                      style="align-items: center; margin-top: 0px;">Aktif</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <p class="text">Type Card</p>
+                  </div>
+                  <div class="column" style="text-align: right;">
+                    <h4>Premium</h4>
+                  </div>
+                </div>
+                <a href="#" class="btn btn-primary" style="align-items: center;">Lihat Transaksi Terakhir</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./bootstrap-5.2.0-dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+  </script>
+</body>
+
+</html>
